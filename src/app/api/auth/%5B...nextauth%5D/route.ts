@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import clientPromise, { requireMongoClientPromise } from "@/lib/mongodb";
+import { verifyUserPassword } from "@/lib/users";
 
 type Role = "user" | "admin" | "super_admin";
 
@@ -18,6 +21,7 @@ function roleForEmail(email: string): Role {
 }
 
 const handler = NextAuth({
+  ...(clientPromise ? { adapter: MongoDBAdapter(requireMongoClientPromise()) } : {}),
   session: { strategy: "jwt" },
   providers: [
     Credentials({
@@ -30,17 +34,18 @@ const handler = NextAuth({
         const email = String(credentials?.email ?? "").trim().toLowerCase();
         const password = String(credentials?.password ?? "");
 
-        const expected = process.env.ADMIN_PASSWORD;
-        if (!email || !password || !expected) return null;
+        if (!email || !password) return null;
 
-        if (!parseAdminEmails().includes(email)) return null;
-        if (password !== expected) return null;
+        if (!process.env.MONGODB_URI) return null;
+
+        const user = await verifyUserPassword({ email, password });
+        if (!user) return null;
 
         return {
-          id: email,
-          email,
-          name: email.split("@")[0],
-          role: roleForEmail(email),
+          id: String(user._id),
+          email: user.email,
+          name: user.name ?? user.email.split("@")[0],
+          role: user.role ?? roleForEmail(user.email),
         } as any;
       },
     }),
