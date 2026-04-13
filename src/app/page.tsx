@@ -1,65 +1,134 @@
-import Image from "next/image";
+import Link from "next/link";
+import { Container } from "@/components/layout/Container";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="relative overflow-hidden">
+      <section className="relative morph-bg">
+        <div className="pointer-events-none absolute inset-0 opacity-55">
+          <div className="absolute -top-32 left-1/2 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-[var(--grad-cosmic)] blur-3xl" />
+          <div className="absolute bottom-[-280px] left-[-180px] h-[520px] w-[520px] rounded-full bg-[var(--grad-gold)] blur-3xl opacity-70" />
+          <div className="absolute bottom-[-260px] right-[-180px] h-[520px] w-[520px] rounded-full bg-[var(--grad-cosmic)] blur-3xl opacity-70" />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <Container className="relative py-20 sm:py-28">
+          <div className="grid items-center gap-10 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/5 px-4 py-2 text-xs text-white/75 backdrop-blur">
+                <span className="h-2 w-2 rounded-full bg-[var(--gold)] shadow-[var(--shadow-gold)]" />
+                400+ pages · 6 Languages · Stories · Community · Marketplace
+              </div>
+
+              <h1
+                className="mt-6 text-5xl leading-[0.95] tracking-tight text-white sm:text-6xl"
+                style={{ fontFamily: "var(--font-hero)" }}
+              >
+                Knowledge
+                <br />
+                <span className="shimmer">Without Borders</span>
+              </h1>
+
+              <p
+                className="mt-6 max-w-2xl text-base leading-7 text-white/75 sm:text-lg"
+                style={{ fontFamily: "var(--font-body)" }}
+              >
+                WORLD FORUM is a cinematic, animation-rich platform for global
+                knowledge and lifestyle learning—built for speed, beauty, and
+                scale.
+              </p>
+
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+                <Link
+                  href="/why-choose-us"
+                  className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-[var(--midnight)]"
+                  style={{
+                    background: "var(--grad-gold)",
+                    boxShadow: "var(--shadow-gold)",
+                  }}
+                >
+                  Explore the vision
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+                >
+                  Contact
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="glass relative overflow-hidden p-6 shadow-[var(--shadow-card)]">
+                <div className="absolute inset-0 bg-gradient-to-b from-white/8 to-transparent" />
+                <div className="relative">
+                  <div
+                    className="text-sm tracking-[0.2em] text-[var(--gold)]"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    MODULES
+                  </div>
+                  <ul className="mt-5 grid gap-3 text-sm text-white/80">
+                    <li className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                      <span>Knowledge Hub</span>
+                      <span className="text-white/50">14 categories</span>
+                    </li>
+                    <li className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                      <span>Language Academy</span>
+                      <span className="text-white/50">A1 → C2</span>
+                    </li>
+                    <li className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                      <span>Story World</span>
+                      <span className="text-white/50">20+ originals</span>
+                    </li>
+                    <li className="flex items-center justify-between rounded-xl border border-white/10 bg-white/5 px-4 py-3">
+                      <span>Marketplace</span>
+                      <span className="text-white/50">local + digital</span>
+                    </li>
+                  </ul>
+
+                  <div className="mt-6 text-xs text-white/55">
+                    Next: we’ll plug in Three.js globe, tsParticles, and GSAP
+                    scroll reveals.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-[var(--midnight)]">
+        <Container className="py-16">
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                title: "Cinematic UI",
+                desc: "Morphing gradients, glass layers, premium typography, micro-interactions.",
+              },
+              {
+                title: "Built to Scale",
+                desc: "App Router + TypeScript + strong structure for 400+ routes.",
+              },
+              {
+                title: "Performance-first",
+                desc: "Code splitting, asset discipline, and Lighthouse-oriented defaults.",
+              },
+            ].map((c) => (
+              <div key={c.title} className="glass p-6">
+                <div
+                  className="text-sm tracking-[0.18em] text-[var(--gold)]"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {c.title}
+                </div>
+                <p className="mt-3 text-sm leading-6 text-white/70">
+                  {c.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+    </main>
   );
 }

@@ -1,26 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand core */
+  --navy: #0a1628;
+  --gold: #c9a84c;
+  --gold-bright: #ffd700;
+  --red: #e63946;
+  --parchment: #f8f5f0;
+  --midnight: #070b14;
+  --steel: #1e2a3a;
+  --white-soft: #f0ede8;
+
+  /* Section accents */
+  --science: #00b4d8;
+  --nature: #40916c;
+  --empires: #e63946;
+  --wars: #6d6875;
+  --health: #4cc9f0;
+  --culture: #f72585;
+  --food: #e76f51;
+  --tourism: #06d6a0;
+  --stories: #7b2ff7;
+  --community: #f72585;
+  --marketplace: #e76f51;
+
+  /* Gradients */
+  --grad-hero: linear-gradient(135deg, #0a1628 0%, #1a237e 50%, #0a1628 100%);
+  --grad-gold: linear-gradient(135deg, #c9a84c, #ffd700, #c9a84c);
+  --grad-cosmic: linear-gradient(135deg, #10002b, #240046, #7b2ff7);
+
+  /* Glass */
+  --glass-bg: rgba(255, 255, 255, 0.06);
+  --glass-border: rgba(255, 255, 255, 0.12);
+
+  /* Shadows */
+  --shadow-gold: 0 0 40px rgba(201, 168, 76, 0.35);
+  --shadow-card: 0 20px 60px rgba(0, 0, 0, 0.45);
+
+  /* Layout */
+  --max-width: 1440px;
+  --nav-height: 72px;
+  --card-radius: 16px;
+
+  /* Typography (runtime-loaded via <link> in layout) */
+  --font-display: "Cinzel", Georgia, serif;
+  --font-hero: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
+  --font-body: "Lora", Georgia, serif;
+  --font-ui: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-story: "Cormorant Garamond", Georgia, serif;
+  --font-chinese-sans: "Noto Sans SC", "Microsoft YaHei", "PingFang SC",
+    sans-serif;
+  --font-chinese-serif: "Noto Serif SC", "Songti SC", serif;
+  --font-german: "Playfair Display", Georgia, serif;
+  --font-code: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--midnight);
+  --color-foreground: var(--white-soft);
+
+  /* Tailwind v4 font tokens */
+  --font-sans: var(--font-ui);
+  --font-serif: var(--font-body);
+  --font-mono: var(--font-code);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--midnight);
+  color: var(--white-soft);
+  font-family: var(--font-ui), system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    sans-serif;
+}
+
+::selection {
+  background: rgba(201, 168, 76, 0.25);
+}
+
+.morph-bg {
+  background: var(--grad-hero);
+  background-size: 400% 400%;
+  animation: gradientMorph 14s ease infinite;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #c9a84c 0%,
+    #ffd700 30%,
+    #ffffff 50%,
+    #ffd700 70%,
+    #c9a84c 100%
+  );
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmerText 3.2s linear infinite;
+}
+
+@keyframes gradientMorph {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes shimmerText {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
