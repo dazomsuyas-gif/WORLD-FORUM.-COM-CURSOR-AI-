@@ -17,6 +17,37 @@ export const SUPPORTED_LANGUAGES: Array<{ slug: LanguageSlug; name: string }> = 
   { slug: "swahili", name: "Swahili" },
 ];
 
+export type VocabTopic =
+  | "phones-and-accessories"
+  | "fashion-and-style"
+  | "food-and-market"
+  | "travel-and-visa"
+  | "daily-life";
+
+export const VOCAB_TOPICS: Array<{ slug: VocabTopic; title: string }> = [
+  { slug: "phones-and-accessories", title: "Phones & Accessories" },
+  { slug: "fashion-and-style", title: "Fashion & Style" },
+  { slug: "food-and-market", title: "Food & Market" },
+  { slug: "travel-and-visa", title: "Travel & Visa" },
+  { slug: "daily-life", title: "Daily Life" },
+];
+
+export type GrammarTopic = "sentence-basics" | "questions" | "past-present-future";
+
+export const GRAMMAR_TOPICS: Array<{ slug: GrammarTopic; title: string }> = [
+  { slug: "sentence-basics", title: "Sentence Basics" },
+  { slug: "questions", title: "Questions" },
+  { slug: "past-present-future", title: "Past / Present / Future" },
+];
+
+export type PronunciationTopic = "vowels" | "consonants" | "stress-and-rhythm";
+
+export const PRONUNCIATION_TOPICS: Array<{ slug: PronunciationTopic; title: string }> = [
+  { slug: "vowels", title: "Vowels" },
+  { slug: "consonants", title: "Consonants" },
+  { slug: "stress-and-rhythm", title: "Stress & Rhythm" },
+];
+
 export type LessonExercise =
   | {
       type: "mcq";
