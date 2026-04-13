@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Flashcards } from "@/components/languages/Flashcards";
 import {
   SUPPORTED_LANGUAGES,
   VOCAB_TOPICS,
@@ -70,13 +71,19 @@ export default async function VocabTopicPage({
   if (!meta || !t) notFound();
 
   const items = SAMPLE[topic];
+  const deckId = `vocab:${lang}:${topic}`;
+  const cards = items.map((it) => ({
+    id: it.term,
+    front: it.term,
+    back: it.meaning,
+  }));
 
   return (
     <main className="bg-[var(--midnight)]">
       <PageHeader
         eyebrow="Language Academy · Vocabulary"
         title={`${meta.name}: ${t.title}`}
-        description="MVP flashcards with placeholders. Next: audio + spaced repetition + images."
+        description="Spaced repetition flashcards (MVP): Again / Hard / Good / Easy scheduling."
         right={
           <Link
             href={`/languages/${lang}/vocabulary`}
@@ -87,19 +94,7 @@ export default async function VocabTopicPage({
         }
       />
       <Container className="py-12">
-        <div className="grid gap-4 md:grid-cols-2">
-          {items.map((it) => (
-            <div key={it.term} className="glass p-6">
-              <div className="text-base font-semibold text-white/90">
-                {it.term}
-              </div>
-              <div className="mt-2 text-sm text-white/70">{it.meaning}</div>
-              <div className="mt-4 text-xs text-white/45">
-                Audio & images coming next.
-              </div>
-            </div>
-          ))}
-        </div>
+        <Flashcards deckId={deckId} cards={cards} />
       </Container>
     </main>
   );
