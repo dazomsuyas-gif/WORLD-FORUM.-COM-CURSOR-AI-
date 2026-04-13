@@ -14,7 +14,7 @@ export default function MarketplacePage() {
       <PageHeader
         eyebrow="Marketplace"
         title="Marketplace"
-        description="Phase MVP: routes + UI shell. Next: products, cart, checkout, and payments."
+        description="Browse products, predict prices from international baselines, and sell your own items."
         right={
           <Link
             href="/marketplace/cart"
@@ -25,6 +25,21 @@ export default function MarketplacePage() {
         }
       />
       <Container className="py-12">
+        <div className="mb-6 flex flex-wrap gap-3">
+          <Link
+            href="/marketplace/products"
+            className="rounded-full px-5 py-2.5 text-sm font-semibold text-[var(--midnight)]"
+            style={{ background: "var(--grad-gold)" }}
+          >
+            Browse products
+          </Link>
+          <Link
+            href="/marketplace/sell"
+            className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+          >
+            Sell a product
+          </Link>
+        </div>
         <div className="grid gap-5 md:grid-cols-3">
           {[
             {
@@ -33,7 +48,7 @@ export default function MarketplacePage() {
             },
             {
               title: "AI Price Prediction",
-              desc: "Later: integrate market signals and animate forecasts.",
+              desc: "MVP predictor is live. Next: market APIs + live FX + brand pricing.",
             },
             {
               title: "Checkout",

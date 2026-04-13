@@ -7,6 +7,8 @@ import { Container } from "@/components/layout/Container";
 const stories = [
   { slug: "midnight-letters", title: "Midnight Letters", genre: "Romance" },
   { slug: "the-quiet-knock", title: "The Quiet Knock", genre: "Horror" },
+  { slug: "red-room", title: "Red Room", genre: "Horror" },
+  { slug: "the-last-seat", title: "The Last Seat", genre: "Relationships" },
 ] as const;
 
 type StorySlug = (typeof stories)[number]["slug"];

@@ -52,6 +52,15 @@ export default function AdminPage() {
           ))}
         </div>
 
+        <div className="mt-8 flex flex-wrap gap-3">
+          <Link
+            href="/admin/marketplace/products"
+            className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+          >
+            Review marketplace products
+          </Link>
+        </div>
+
         <div className="mt-8 glass p-7 text-sm text-white/70">
           Access control is intentionally not implemented yet. Next phase will
           protect <span className="text-white/90">/admin</span> using sessions +

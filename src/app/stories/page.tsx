@@ -19,9 +19,23 @@ export default function StoriesPage() {
       <PageHeader
         eyebrow="Story World"
         title="Stories"
-        description="Phase MVP: hub + story routes. Next phase: chapter reader + genre effects."
+        description="Explore genres: relationships, horror, life, adventure. Next phase: chapter reader + cinematic effects."
       />
       <Container className="py-12">
+        <div className="mb-6 flex flex-wrap gap-3">
+          <Link
+            href="/stories/relationships"
+            className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+          >
+            Relationships
+          </Link>
+          <Link
+            href="/stories/horror"
+            className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+          >
+            Horror
+          </Link>
+        </div>
         <div className="grid gap-5 md:grid-cols-2">
           {featured.map((s) => (
             <Link
