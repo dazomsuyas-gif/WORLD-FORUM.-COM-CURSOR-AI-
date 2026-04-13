@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Container } from "@/components/layout/Container";
+import { LoginForm } from "./LoginForm";
 
 export const metadata: Metadata = {
   title: "Log in — WORLD FORUM",
@@ -14,15 +16,17 @@ export default function LoginPage() {
       <PageHeader eyebrow="Account" title="Log in" />
       <Container className="py-12">
         <div className="mx-auto max-w-lg glass p-8">
-          <div className="text-sm text-white/70">
-            Authentication will be added in a later phase (NextAuth + roles).
-          </div>
-          <div className="mt-6 flex gap-3">
+          <Suspense
+            fallback={<div className="text-sm text-white/70">Loading…</div>}
+          >
+            <LoginForm />
+          </Suspense>
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link
               href="/register"
               className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
             >
-              Create account
+              Create account (later)
             </Link>
             <Link
               href="/"
