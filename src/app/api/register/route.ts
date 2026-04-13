@@ -9,13 +9,6 @@ const schema = z.object({
 });
 
 export async function POST(req: Request) {
-  if (!process.env.MONGODB_URI) {
-    return NextResponse.json(
-      { ok: false, error: "Server not configured (missing MONGODB_URI)." },
-      { status: 503 },
-    );
-  }
-
   const json = await req.json().catch(() => null);
   const parsed = schema.safeParse(json);
   if (!parsed.success) {

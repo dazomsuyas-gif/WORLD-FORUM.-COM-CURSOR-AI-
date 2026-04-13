@@ -36,7 +36,19 @@ const handler = NextAuth({
 
         if (!email || !password) return null;
 
-        if (!process.env.MONGODB_URI) return null;
+        // If MongoDB is not configured, we still allow an MVP admin sign-in via env.
+        if (!process.env.MONGODB_URI) {
+          const expected = process.env.ADMIN_PASSWORD;
+          if (!expected) return null;
+          if (!parseAdminEmails().includes(email)) return null;
+          if (password !== expected) return null;
+          return {
+            id: email,
+            email,
+            name: email.split("@")[0],
+            role: roleForEmail(email),
+          } as any;
+        }
 
         const user = await verifyUserPassword({ email, password });
         if (!user) return null;
