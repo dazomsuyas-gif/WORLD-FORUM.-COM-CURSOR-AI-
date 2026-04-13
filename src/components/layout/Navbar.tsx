@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/stories", label: "Stories" },
   { href: "/community", label: "Community" },
   { href: "/marketplace", label: "Marketplace" },
+  { href: "/membership", label: "Membership" },
 ] as const;
 
 export function Navbar() {
