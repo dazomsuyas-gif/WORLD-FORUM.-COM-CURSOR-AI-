@@ -34,14 +34,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const languageRoutes = SUPPORTED_LANGUAGES.flatMap((l) => {
     const langRoot = `/languages/${l.slug}`;
-    const levels = ["A1", "A2", "B1", "B2", "C1", "C2"].map((level) => `${langRoot}/${level}`);
+    const levels = ["A1", "A2", "B1", "B2", "C1", "C2"].map(
+      (level) => `${langRoot}/${level}`,
+    );
     const vocab = [
       `${langRoot}/vocabulary`,
       ...VOCAB_TOPICS.map((t) => `${langRoot}/vocabulary/${t.slug}`),
     ];
     const grammar = [
       `${langRoot}/grammar`,
-      ...GRAMMAR_TOPICS.map((t) => `${langRoot}/grammar/${t.slug}`),
+      ...GRAMMAR_TOPICS.flatMap((t) => [
+        `${langRoot}/grammar/${t.slug}`,
+        ...["A1", "A2", "B1", "B2", "C1", "C2"].map(
+          (level) => `${langRoot}/grammar/${t.slug}/${level}`,
+        ),
+      ]),
     ];
     const pronunciation = [
       `${langRoot}/pronunciation`,

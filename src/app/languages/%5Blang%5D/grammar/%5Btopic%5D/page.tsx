@@ -70,7 +70,7 @@ export default async function GrammarTopicPage({
       <PageHeader
         eyebrow="Language Academy · Grammar"
         title={`${meta.name}: ${t.title}`}
-        description="MVP content outline. Next: animated diagrams + drills per CEFR level."
+        description="Key points + interactive drills per CEFR level."
         right={
           <Link
             href={`/languages/${lang}/grammar`}
@@ -81,6 +81,17 @@ export default async function GrammarTopicPage({
         }
       />
       <Container className="py-12">
+        <div className="mb-6 flex flex-wrap gap-3">
+          {["A1", "A2", "B1", "B2", "C1", "C2"].map((lvl) => (
+            <Link
+              key={lvl}
+              href={`/languages/${lang}/grammar/${topic}/${lvl}`}
+              className="rounded-full border border-white/15 bg-white/5 px-5 py-2.5 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+            >
+              {lvl} drills
+            </Link>
+          ))}
+        </div>
         <div className="glass p-8">
           <div className="text-xs uppercase tracking-wider text-white/50">
             Key points
@@ -94,7 +105,7 @@ export default async function GrammarTopicPage({
             ))}
           </ul>
           <div className="mt-6 text-xs text-white/45">
-            Next: interactive exercises, examples, and a lesson map.
+            Use the level buttons above to practice drills.
           </div>
         </div>
       </Container>

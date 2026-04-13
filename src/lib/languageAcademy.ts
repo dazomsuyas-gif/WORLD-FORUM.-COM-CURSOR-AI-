@@ -61,6 +61,13 @@ export type LessonExercise =
       prompt: string;
       pairs: Array<{ left: string; right: string }>;
       explain?: string;
+    }
+  | {
+      type: "fill";
+      prompt: string;
+      answer: string;
+      placeholder?: string;
+      explain?: string;
     };
 
 export type Lesson = {
@@ -152,5 +159,85 @@ export function getUnit(lang: LanguageSlug, level: CefrLevel, unitId: string) {
 
 export function getLesson(lang: LanguageSlug, level: CefrLevel, unitId: string, lessonId: string) {
   return getUnit(lang, level, unitId)?.lessons.find((ls) => ls.id === lessonId) ?? null;
+}
+
+export type GrammarDrill = {
+  id: string;
+  title: string;
+  exercises: LessonExercise[];
+};
+
+export function getGrammarDrill(params: {
+  lang: LanguageSlug;
+  topic: GrammarTopic;
+  level: CefrLevel;
+}): GrammarDrill {
+  const { lang, topic, level } = params;
+
+  // MVP: language-specific content can be expanded later.
+  const baseId = `grammar:${lang}:${topic}:${level}`;
+
+  if (topic === "sentence-basics") {
+    return {
+      id: baseId,
+      title: "Sentence Basics Drill",
+      exercises: [
+        {
+          type: "mcq",
+          prompt: "Pick the best word order for a simple statement (English pattern).",
+          choices: ["Subject → Verb → Object", "Verb → Subject → Object", "Object → Subject → Verb"],
+          answerIndex: 0,
+        },
+        {
+          type: "fill",
+          prompt: "Fill the blank: I ____ coffee.",
+          placeholder: "verb",
+          answer: "like",
+          explain: "Present simple: I like coffee.",
+        },
+      ],
+    };
+  }
+
+  if (topic === "questions") {
+    return {
+      id: baseId,
+      title: "Questions Drill",
+      exercises: [
+        {
+          type: "mcq",
+          prompt: "Choose the question word for asking a person.",
+          choices: ["Who", "Where", "When"],
+          answerIndex: 0,
+        },
+        {
+          type: "fill",
+          prompt: "Fill the blank: ____ is your name?",
+          placeholder: "question word",
+          answer: "What",
+        },
+      ],
+    };
+  }
+
+  // past-present-future
+  return {
+    id: baseId,
+    title: "Tenses Drill",
+    exercises: [
+      {
+        type: "mcq",
+        prompt: "Pick the past tense sentence.",
+        choices: ["I eat rice.", "I ate rice.", "I will eat rice."],
+        answerIndex: 1,
+      },
+      {
+        type: "fill",
+        prompt: "Fill the blank: Tomorrow I ____ travel.",
+        placeholder: "aux verb",
+        answer: "will",
+      },
+    ],
+  };
 }
 

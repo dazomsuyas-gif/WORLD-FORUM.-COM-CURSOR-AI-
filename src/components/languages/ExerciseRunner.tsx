@@ -155,6 +155,68 @@ function MatchExercise(props: {
   );
 }
 
+function FillExercise(props: {
+  ex: Extract<LessonExercise, { type: "fill" }>;
+  onCorrect: () => void;
+}) {
+  const { ex, onCorrect } = props;
+  const [val, setVal] = useState("");
+  const [checked, setChecked] = useState(false);
+
+  const correct =
+    checked &&
+    val.trim().toLowerCase() === ex.answer.trim().toLowerCase();
+
+  return (
+    <div className="glass p-6">
+      <div className="text-sm font-semibold text-white">{ex.prompt}</div>
+      <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center">
+        <input
+          value={val}
+          onChange={(e) => {
+            setVal(e.target.value);
+            setChecked(false);
+          }}
+          placeholder={ex.placeholder ?? "Type answer"}
+          className="glass w-full px-4 py-3 text-sm text-white/90 placeholder:text-white/40 outline-none"
+        />
+        <button
+          type="button"
+          onClick={() => setChecked(true)}
+          className="rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white/85 transition hover:border-white/25 hover:bg-white/10"
+        >
+          Check
+        </button>
+      </div>
+
+      {checked ? (
+        <div className="mt-4 text-sm">
+          {correct ? (
+            <div className="text-emerald-200">
+              Correct.{" "}
+              <button
+                type="button"
+                onClick={onCorrect}
+                className="ml-2 text-[var(--gold)] hover:underline"
+              >
+                Continue
+              </button>
+            </div>
+          ) : (
+            <div className="text-red-200">
+              Not quite. Answer:{" "}
+              <span className="text-white/90">{ex.answer}</span>
+              {ex.explain ? (
+                <div className="mt-2 text-white/60">{ex.explain}</div>
+              ) : null}
+            </div>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function ExerciseRunner(props: { lessonKey: string; lesson: Lesson }) {
   const { lesson, lessonKey } = props;
   const [idx, setIdx] = useState(0);
@@ -196,8 +258,10 @@ export function ExerciseRunner(props: { lessonKey: string; lesson: Lesson }) {
 
       {ex.type === "mcq" ? (
         <McqExercise ex={ex} onCorrect={onCorrect} />
-      ) : (
+      ) : ex.type === "match" ? (
         <MatchExercise ex={ex} onCorrect={onCorrect} />
+      ) : (
+        <FillExercise ex={ex} onCorrect={onCorrect} />
       )}
     </div>
   );
