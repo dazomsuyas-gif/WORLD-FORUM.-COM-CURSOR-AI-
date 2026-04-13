@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Container } from "@/components/layout/Container";
+import type { CefrLevel } from "@/lib/languageAcademy";
 
 const supported = [
   { slug: "english", name: "English" },
@@ -42,12 +43,14 @@ export default async function LanguagePage({
   const meta = supported.find((x) => x.slug === lang);
   if (!meta) notFound();
 
+  const levels: CefrLevel[] = ["A1", "A2", "B1", "B2", "C1", "C2"];
+
   return (
     <main className="bg-[var(--midnight)]">
       <PageHeader
         eyebrow="Language Academy"
         title={meta.name}
-        description="Route skeleton is ready. Next we’ll add CEFR levels, units, lessons, and exercises."
+        description="Choose a level to start. Each level contains units, lessons, and interactive exercises."
         right={
           <Link
             href="/languages"
@@ -59,8 +62,12 @@ export default async function LanguagePage({
       />
       <Container className="py-12">
         <div className="grid gap-5 md:grid-cols-3">
-          {["A1", "A2", "B1", "B2", "C1", "C2"].map((lvl) => (
-            <div key={lvl} className="glass p-6">
+          {levels.map((lvl) => (
+            <Link
+              key={lvl}
+              href={`/languages/${lang}/${lvl}`}
+              className="glass block p-6 transition hover:border-white/20"
+            >
               <div
                 className="text-sm tracking-[0.18em] text-[var(--gold)]"
                 style={{ fontFamily: "var(--font-display)" }}
@@ -68,9 +75,9 @@ export default async function LanguagePage({
                 {lvl}
               </div>
               <p className="mt-3 text-sm leading-6 text-white/70">
-                Coming next: units, lessons, and interactive practice.
+                Open level overview → units → lessons.
               </p>
-            </div>
+            </Link>
           ))}
         </div>
       </Container>
